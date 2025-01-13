@@ -25,15 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ProgressBar 
-        height="2px"
-        color="#87CEEB"
-        options={{ showSpinner: false }}
-        shallowRouting
-      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ProgressBar 
+          height="2px"
+          color="#87CEEB"
+          options={{ showSpinner: false }}
+          shallowRouting
+        />
         {children}
       </body>
     </html>

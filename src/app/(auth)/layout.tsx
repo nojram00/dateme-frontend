@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import "./authlayout.css";
 import LogoutBtn from "@/components/LogoutBtn";
-import { checkSession } from "@/libs/auth";
 
 export default function AuthenticatedLayout({ children }: Readonly<{ children: React.ReactNode }>)
 {
-    const { success, data } = checkSession();
 
     return (
     <div>

@@ -4,7 +4,7 @@ import { cookies } from  "next/headers"
 import { redirect } from "next/navigation"
 
 
-export async function login(prevState : never, formData : FormData) {
+export async function login(prevState : any, formData : FormData) {
     const credentials = {
         username : formData.get("username") as string ?? "",
         password : formData.get("password") as string ?? ""
@@ -18,11 +18,9 @@ export async function login(prevState : never, formData : FormData) {
         c.set("session", session);
         return redirect("/posts");
     }
-    else
-    {
-        return {
-            error : "Invalid credentials"
-        }
+    
+    return {
+        error : "Invalid credentials"
     }
 
 }

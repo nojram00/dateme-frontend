@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <ProgressBar 
+        height="2px"
+        color="#87CEEB"
+        options={{ showSpinner: false }}
+        shallowRouting
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

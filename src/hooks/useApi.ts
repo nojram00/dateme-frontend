@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function useGet(url : string) {
+export function useGet<T>(url : string) : { data : T[], loading : boolean, isError : boolean } {
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<T[]>([]);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 

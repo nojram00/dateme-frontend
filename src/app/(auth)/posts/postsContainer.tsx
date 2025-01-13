@@ -1,9 +1,20 @@
 "use client"
 import { useGet } from "@/hooks/useApi";
 
+/**
+ * @typedef {Object} Post
+ * 
+ * @property {string} uid - The unique identifier of the post
+ * @property {string} content - The content of the post
+ */
+type Post = {
+    uid : string;
+    content : string;
+}
+
 export default function Posts() {
 
-    const { data, loading, isError } = useGet("https://dateme-server.onrender.com/posts");
+    const { data, loading, isError } = useGet<Post>("https://dateme-server.onrender.com/posts");
 
     console.log(data);
 

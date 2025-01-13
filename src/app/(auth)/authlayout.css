@@ -1,0 +1,8 @@
+
+nav{
+    @apply p-3
+}
+
+nav > * {
+    @apply bg-neutral-content p-3 text-black rounded-md transition-transform hover:-translate-y-1 hover:shadow-md flex flex-row gap-5 items-center justify-start text-xl
+}

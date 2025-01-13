@@ -3,6 +3,7 @@ import axios from 'axios';
 import { cookies } from  "next/headers"
 import { redirect } from "next/navigation"
 
+// @typescript-eslint/no-explicit-any
 
 export async function login(prevState : any, formData : FormData) {
     const credentials = {

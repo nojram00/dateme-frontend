@@ -34,16 +34,12 @@ export async function logout()
     const response = await axios.post(`${process.env.BACKEND_URL}/users/logout`, {},{
         headers : {
             'Content-Type' : 'application/json',
-            'X-Session-Header' : c.get("session").value
+            'X-Session-Header' : c.get("session")?.value
         }
     });
 
     if (response.status === 200) {
         c.delete("session");
         return redirect("/login");
-    }
-    else
-    {
-        console.error(response.error);
     }
 }

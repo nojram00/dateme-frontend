@@ -1,7 +1,6 @@
 "use client"
 import { useGet } from "@/hooks/useApi";
 import Link from "next/link";
-import { useEffect } from "react";
 
 /**
  * @typedef {Object} Post

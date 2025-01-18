@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function useGet<T>(url : string) : { data : T[], loading : boolean, isError : boolean } {
+export function useGet<T>(url : string) : { data : T, loading : boolean, isError : boolean } {
 
-    const [data, setData] = useState<T[]>([]);
+    const [data, setData] = useState<T>({} as T);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
@@ -15,7 +15,8 @@ export function useGet<T>(url : string) : { data : T[], loading : boolean, isErr
                 setData(response.data);
             }
             setLoading(false);
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err);
             setIsError(true);
             setLoading(false);
         });

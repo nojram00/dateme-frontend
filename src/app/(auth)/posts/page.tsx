@@ -1,4 +1,6 @@
 import PostContainer from "./postsContainer";
+import CreatePostBox from "./createPostBox";
+
 export const metadata = {
     title : "Posts"
 }
@@ -6,7 +8,7 @@ export const metadata = {
 export default function Posts() {
     return (
         <div className="w-full">
-            Hello
+            <CreatePostBox />
 
             <PostContainer />
         </div>

@@ -5,7 +5,7 @@ import { checkSession } from './libs/auth';
 
 const guestRoutes = ["/login","/register", "/"];
 
-const authRoutes = ["/posts"]
+const authRoutes = ["/posts", "/profile"];
 
 const onGuestRoute = (path : string) => {
     return guestRoutes.includes(path);

@@ -1,8 +1,16 @@
-export default function OtherProfilePage({ params } : { params : {uid : string}}) {
+
+type ProfileProps = {
+    params : Promise<{
+        uid : string
+    }>
+}
+
+export default async function OtherProfilePage({ params } : ProfileProps) {
+    const id = (await params).uid;
     return(
         <div>
             Other Profile Page
-            {params.uid}
+            {id}
         </div>
     )
 }

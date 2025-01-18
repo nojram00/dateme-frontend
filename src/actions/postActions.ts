@@ -10,7 +10,6 @@ export async function createPost(prevState : { error : string }, formData : Form
     const session_id = session?.value;
 
     const response = await axios.post(`${process.env.BACKEND_URL}/posts/create`, {
-        title : formData.get("title"),
         content : formData.get("content")
     }, {
         headers : {

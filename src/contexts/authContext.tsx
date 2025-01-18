@@ -1,7 +1,6 @@
 "use client"
 
-import React, { createContext, use } from 'react';
-import { checkSession } from '@/libs/auth';
+import React, { createContext } from 'react';
 
 export type Profile = {
     name: string;

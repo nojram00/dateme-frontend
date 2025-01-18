@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import "./authlayout.css";
-import LogoutBtn from "@/components/LogoutBtn";
 import HeaderNavBar from '@/components/headerNavBar';
 import AuthComponent from '@/contexts/authContext';
 import { checkSession } from '@/libs/auth';

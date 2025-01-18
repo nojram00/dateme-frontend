@@ -3,7 +3,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function createPost(prevState : any, formData : FormData)
+export async function createPost(prevState : { error : string }, formData : FormData)
 {
     const c = await cookies();
     const session = c.get("session");

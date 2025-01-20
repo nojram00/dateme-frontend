@@ -11,7 +11,7 @@ export default async function AuthenticatedLayout({ children }: Readonly<{ child
     <AuthComponent data={{
         name: session.data.first_name + " " + session.data.last_name,
         email: session.data.email,
-        id: session.data.id
+        id: session.data.uid
     }}>
         <div>
             <header className="shadow-md h-20 w-full bg-base-100 flex items-center justify-between">

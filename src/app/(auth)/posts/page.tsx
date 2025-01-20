@@ -1,5 +1,6 @@
 import PostContainer from "./postsContainer";
 import CreatePostBox from "./createPostBox";
+import { PostProvider } from "@/contexts/postsContext";
 
 export const metadata = {
     title : "Posts"
@@ -8,9 +9,10 @@ export const metadata = {
 export default function Posts() {
     return (
         <div className="w-full">
-            <CreatePostBox />
-
-            <PostContainer />
+            <PostProvider>
+                <CreatePostBox />
+                <PostContainer />
+            </PostProvider>
         </div>
     )
 }

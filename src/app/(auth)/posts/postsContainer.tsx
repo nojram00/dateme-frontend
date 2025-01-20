@@ -1,41 +1,16 @@
 "use client"
 import { useGet } from "@/hooks/useApi";
 import Link from "next/link";
-
-type Response = {
-    data : Post[];
-    current_page : number;
-    total_pages : number;
-}
-
-type Profile = {
-    uid : string;
-    username : string;
-    first_name : string;
-    last_name : string;
-    email : string;
-}
-
-
-/**
- * @typedef {Object} Post
- * 
- * @property {string} uid - The unique identifier of the post
- * @property {string} content - The content of the post
- */
-type Post = {
-    post_id : string;
-    user_id : string;
-    content : string;
-    likes : number;
-    user_info : Profile;
-}
+import { useEffect } from "react";
+import { Response } from "@/contexts/postsContext";
+import { useAuthContext } from "@/contexts/authContext";
 
 export default function Posts() {
-
     const { data, loading, isError } = useGet<Response>("https://dateme-server.onrender.com/posts");
+    const { name, email, id } = useAuthContext();
 
     console.log("Data: ",data);
+    console.log("User id: ", name);
 
     if (loading) {
         return (
@@ -63,7 +38,7 @@ export default function Posts() {
 
     return (
         <div className="p-5 w-full flex flex-col gap-6">
-            { data && data.data.map((post, index) => {
+            { data && data.data?.map((post, index) => {
                 return (
                     <div className="card bg-base-200 w-full shadow-xl" key={index}>
                         <div className="card-body">
@@ -74,7 +49,7 @@ export default function Posts() {
                             <hr className="border-t-2 my-4 border-gray-200"/>
                             <p>{ post.content}</p>
                             <div className="card-actions justify-end mt-10">
-                                <button className="btn btn-primary">Like</button>
+                                <LikeButton liked={post.user_likes.includes(id)}/>
                             </div>
                         </div>
                     </div>
@@ -85,6 +60,19 @@ export default function Posts() {
                 { data.total_pages > 1 && <Paginator current_page={data.current_page} total_pages={data.total_pages}/> }
             </div>
         </div>
+    );
+}
+
+const LikeButton = ({ liked } : { liked : boolean }) => {
+
+    if(liked) {
+        return (
+            <button className="btn btn-primary">Unlike</button>
+        );
+    }
+
+    return (
+        <button className="btn btn-primary">Like</button>
     );
 }
 

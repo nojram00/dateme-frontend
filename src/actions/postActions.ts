@@ -1,9 +1,10 @@
 "use server"
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function createPost(prevState : { error : string }, formData : FormData)
+export async function createPost(prevState : { error : string } , formData : FormData)
 {
     const c = await cookies();
     const session = c.get("session");

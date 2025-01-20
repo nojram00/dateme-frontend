@@ -24,7 +24,6 @@ export async function checkSession()
 
 
         if(response.status === 200) {
-            console.log("Session shit: ", response.data);
             return {
                 success : true,
                 data : response.data

@@ -57,7 +57,6 @@ export async function register(prevState : { error : string | null }, formData :
 export async function logout()
 {
     const c = await cookies();
-    console.log("Session: ",c.get("session"));
     const response = await axios.post(`${process.env.BACKEND_URL}/users/logout`, {},{
         headers : {
             'Content-Type' : 'application/json',

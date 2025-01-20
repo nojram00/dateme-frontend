@@ -18,3 +18,11 @@ export default function AuthComponent({children, data} : {children : React.React
         </AuthContext.Provider>
     )
 }
+
+export const useAuthContext = () => {
+    const context = React.useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error("useAuthContext must be used within a AuthProvider");
+    }
+    return context;
+}

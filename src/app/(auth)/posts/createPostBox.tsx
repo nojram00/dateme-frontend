@@ -1,12 +1,13 @@
 "use client"
 import { createPost } from "@/actions/postActions";
-import { useActionState } from "react";
+import { useActionState, useContext, useEffect } from "react";
+import { usePostContext } from "@/contexts/postsContext";
 
 export default function CreatePostBox() {
-
     const [state, dispatch, pending] = useActionState(createPost, {
         error : ""
     });
+
     return (
         <div className="card bg-base-200 w-full shadow-xl">
             { state.error }

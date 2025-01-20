@@ -17,8 +17,6 @@ const onAuthRoute = (path : string) => {
 export default async function middleware(req : NextRequest) {
     const { success, data } = await checkSession();
 
-    if(success) console.log("Session: ", data);
-
     if(onGuestRoute(req.nextUrl.pathname) && success) {
         const url = req.nextUrl.clone();
         url.pathname = "/posts";

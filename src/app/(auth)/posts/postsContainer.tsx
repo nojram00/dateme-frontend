@@ -82,7 +82,7 @@ export default function Posts() {
             })}
 
             <div>
-                <Paginator current_page={data.current_page} total_pages={data.total_pages}/>
+                { data.total_pages > 1 && <Paginator current_page={data.current_page} total_pages={data.total_pages}/> }
             </div>
         </div>
     );

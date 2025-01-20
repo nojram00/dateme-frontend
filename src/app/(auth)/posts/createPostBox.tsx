@@ -12,7 +12,7 @@ export default function CreatePostBox() {
             { state.error }
             <form action={dispatch} className="card-body">
                 <h2>Create a new post</h2>
-                <textarea className="textarea h-24 textarea-bordered" placeholder="What's on your mind?" name="content"></textarea>
+                <textarea disabled={pending} className="textarea h-24 textarea-bordered" placeholder="What's on your mind?" name="content"></textarea>
                 <div className="card-actions justify-end mt-10">
                     <button className="btn btn-primary" disabled={pending}>{ !pending ? "Post" : "Posting..." }</button>
                 </div>

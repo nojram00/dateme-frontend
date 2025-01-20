@@ -14,12 +14,8 @@ export default async function AuthenticatedLayout({ children }: Readonly<{ child
         id: session.data.id
     }}>
         <div>
-            <header className="bg-neutral px-4 shadow-md h-20 w-full flex flex-row gap-6">
-                <div id="logo" className="text-2xl font-bold flex flex-row items-center h-full">Dateme</div>
-                <div className="flex-1 flex flex-row justify-end items-center">
-                    {/* <LogoutBtn/> */}
-                    <HeaderNavBar/>
-                </div>
+            <header className="shadow-md h-20 w-full bg-base-100 flex items-center justify-between">
+                <HeaderNavBar/>
             </header>
             <div className="flex">
                 <aside className="w-80 bg-accent-content min-h-screen">

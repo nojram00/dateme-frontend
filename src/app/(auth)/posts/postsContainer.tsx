@@ -2,6 +2,21 @@
 import { useGet } from "@/hooks/useApi";
 import Link from "next/link";
 
+type Response = {
+    data : Post[];
+    current_page : number;
+    total_pages : number;
+}
+
+type Profile = {
+    uid : string;
+    username : string;
+    first_name : string;
+    last_name : string;
+    email : string;
+}
+
+
 /**
  * @typedef {Object} Post
  * 
@@ -13,13 +28,14 @@ type Post = {
     user_id : string;
     content : string;
     likes : number;
+    user_info : Profile;
 }
 
 export default function Posts() {
 
-    const { data, loading, isError } = useGet<Post[]>("https://dateme-server.onrender.com/posts");
+    const { data, loading, isError } = useGet<Response>("https://dateme-server.onrender.com/posts");
 
-    console.log(data);
+    console.log("Data: ",data);
 
     if (loading) {
         return (
@@ -27,11 +43,11 @@ export default function Posts() {
                 <div className="card bg-base-200 w-full shadow-xl">
                     <div className="card-body">
                         <div className="w-full flex flex-col gap-1">
-                            <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md"></span>
-                            <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md"></span>
+                            <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md skeleton"></span>
+                            <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md skeleton"></span>
                         </div>
                         <hr className="border-t-2 my-4 border-gray-200"/>
-                        <p className="h-20 max-w-lg w-full bg-gray-400 rounded-md"></p>
+                        <p className="h-20 max-w-lg w-full bg-gray-400 rounded-md skeleton"></p>
                         <div className="card-actions justify-end mt-10">
                             <button className="btn btn-primary">...</button>
                         </div>
@@ -46,12 +62,15 @@ export default function Posts() {
     }
 
     return (
-        <div className="p-5 w-full flex flex-col">
-            { data && data.map((post, index) => {
+        <div className="p-5 w-full flex flex-col gap-6">
+            { data && data.data.map((post, index) => {
                 return (
                     <div className="card bg-base-200 w-full shadow-xl" key={index}>
                         <div className="card-body">
-                            <ProfileShit uid={post.user_id} />
+                        <Link className="flex flex-col gap-1 hover:underline" href={`/profile/${post.user_info.uid}`}>
+                            <span>{post.user_info.first_name} {post.user_info.last_name}</span>
+                            <span>@{post.user_info.username}</span>
+                        </Link>
                             <hr className="border-t-2 my-4 border-gray-200"/>
                             <p>{ post.content}</p>
                             <div className="card-actions justify-end mt-10">
@@ -61,36 +80,19 @@ export default function Posts() {
                     </div>
                 );
             })}
+
+            <div>
+                <Paginator current_page={data.current_page} total_pages={data.total_pages}/>
+            </div>
         </div>
     );
 }
 
- 
-type Profile = {
-    uid : string;
-    username : string;
-    first_name : string;
-    last_name : string;
-    email : string;
-}
-
-function ProfileShit({ uid } : { uid : string })
-{
-    const { data, loading, isError } = useGet<Profile>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${uid}`);
-
-    if (loading) {
-        return (
-            <div className="w-full flex flex-col gap-1">
-                <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md"></span>
-                <span className="h-5 max-w-lg w-full bg-gray-400 rounded-md"></span>
-            </div>
-        );
-    }
-
-    return(
-        <Link className="flex flex-col gap-1 hover:underline" href={`/profile/${data.uid}`}>
-            <span>{data.first_name} {data.last_name}</span>
-            <span>@{data.username}</span>
-        </Link>
-    )
+const Paginator = ({ current_page, total_pages } : { current_page : number, total_pages : number }) => {
+    return (
+        <div className="flex justify-center gap-2">
+            <button disabled={current_page === 1} className="btn btn-primary">Previous</button>
+            <button disabled={current_page === total_pages} className="btn btn-primary">Next</button>
+        </div>
+    );
 }
